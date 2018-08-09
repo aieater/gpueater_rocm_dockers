@@ -49,7 +49,10 @@ ls -la /dev/dri/ # Display and OpenCL file descriptors
 
 ####  - Run a container with GPU driver file descriptor.
  \* If you already used the GPUEater AMD GPU instance, the following command is not required.
-```docker run -it --device=/dev/kfd --device=/dev/dri --group-add video gpueater/rocm-tensorflow-1.8```
+
+```sh
+docker run -it --device=/dev/kfd --device=/dev/dri --group-add video gpueater/rocm-tensorflow-1.8
+```
 
 
 
