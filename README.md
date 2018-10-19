@@ -1,12 +1,38 @@
-## TensorFlow 1.8 image on AMD Radeon GPU
+
+## Docker
+
+#### Available images
+
+https://hub.docker.com/r/gpueater/ubuntu16-rocm-1.9.211-tensorflow-1.11.0/
+
+https://hub.docker.com/r/gpueater/rocm-tensorflow-1.8/
+
+### Latest
+
+```
+docker run -it --device=/dev/kfd --device=/dev/dri gpueater/ubuntu16-rocm-1.9.211-tensorflow-1.11.0
+```
+
+### Old images
+
+```
+docker run -it --device=/dev/kfd --device=/dev/dri gpueater/rocm-tensorflow-1.8
+```
+
+<br>
+<br>
+<br>
+
+## ROCm1.9.211+TensorFlow 1.11.0 image for AMD Radeon GPU
 
 
 
 
 ###  # Recommended environment of host
+
  OS: Ubuntu16.04.05+
  Kernel: 4.15+
- ROCm: 1.8.192+
+ ROCm: 1.9.211+
 
 ### # AMD Radeon driver installation on Host
 
@@ -29,15 +55,15 @@ sudo reboot
 sudo apt install -y wget
 wget -qO - http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | sudo apt-key add -
 sudo sh -c 'echo deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main > /etc/apt/sources.list.d/rocm.list'
-sudo apt install -y libnuma-dev
-sudo apt install -y rocm-dkms rocm-opencl-dev
+sudo apt install -y libnuma-dev rocm-dkms
 sudo usermod -a -G video $LOGNAME
 ```
 
 #### - Make sure to see AMD Radeon GPUs.
+
 ```/opt/rocm/opencl/bin/x86_64/clinfo
 
-ls -la /dev/kfd # AMD Kernele Fusion Driver
+ls -la /dev/kfd # AMD Kernel Fusion Driver
 ls -la /dev/dri/ # Display and OpenCL file descriptors
 ```
 
@@ -45,14 +71,12 @@ ls -la /dev/dri/ # Display and OpenCL file descriptors
 ###  # Docker-CE on Host
 
 ####  - Install docker-ce
- https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 ####  - Run a container with GPU driver file descriptor.
- \* If you already used the GPUEater AMD GPU instance, the following command is not required.
 
-```sh
-docker run -it --device=/dev/kfd --device=/dev/dri --group-add video gpueater/rocm-tensorflow-1.8
-```
+```docker run -it --device=/dev/kfd --device=/dev/dri gpueater/ubuntu16-rocm-1.9.211-tensorflow-1.11.0```
 
 
 
@@ -168,5 +192,6 @@ Number of devices:				 1
 ```
 
 
+Also see https://www.gpueater.com/help
 
-
+Also see https://github.com/aieater/rocm_tensorflow_info
